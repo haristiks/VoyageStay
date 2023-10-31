@@ -1,3 +1,4 @@
+import axios from "@/lib/axios";
 import NextAuth from "next-auth";
 import GithubProvider from "next-auth/providers/github";
 import GoogleProvider from "next-auth/providers/google";
@@ -23,20 +24,44 @@ export const authOptions = {
       },
 
       async authorize(credentials) {
-        if (!credentials?.email || !credentials?.password) {
+        if (!credentials?.email && !credentials?.password) {
           throw new Error("Invalid credentials");
         }
         try {
           const response = await axios.post(
-            "http://localhost:8000/api/users/auth/login",
+            "/api/users/auth/login",
             credentials
           );
-          return response.user;
+
+          const user = response.data;
+
+          if (user) {
+            return user;
+          } else {
+            return null;
+          }
         } catch (error) {
           throw new Error(error.response.data.message);
         }
       },
     }),
   ],
+  pages: {
+    signIn: "/",
+  },
+  debug: process.env.NODE_ENV === "development",
+  //   session: {
+  //     strategy: "jwt",
+  //   },
+  secret: process.env.NEXTAUTH_SECRET,
+  callbacks: {
+    async jwt({ token, user }) {
+      return { ...token, ...user };
+    },
+    async session({ session, token, user }) {
+      session.user = token;
+      return session;
+    },
+  },
 };
 export default NextAuth(authOptions);

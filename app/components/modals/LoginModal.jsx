@@ -31,25 +31,28 @@ function LoginModal() {
     },
   });
 
-  const onSubmit = (data) => {
+  const onSubmit = async (data) => {
     setIsLoading(true);
 
-    signIn("credentials", {
-      ...data,
+    const callback = await signIn("credentials", {
+      email: data.email,
+      password: data.password,
       redirect: false,
-    }).then((callback) => {
-      setIsLoading(false);
-
-      if (callback?.ok) {
-        toast.success("Logged in");
-        router.refresh();
-        loginModal.onClose();
-      }
-
-      if (callback?.error) {
-        toast.error(callback.error);
-      }
     });
+
+    console.log(callback);
+
+    setIsLoading(false);
+
+    if (callback?.ok) {
+      toast.success("Logged in");
+      router.refresh();
+      loginModal.onClose();
+    }
+
+    if (callback?.error) {
+      toast.error(callback.error);
+    }
   };
 
   const bodyContent = (
@@ -88,7 +91,7 @@ function LoginModal() {
         outline
         label="Continue with Github"
         icon={AiFillGithub}
-        onClick={() => {}}
+        onClick={() => signIn("github")}
       />
       <div className="text-neutral-500 text-center mt-4 font-light">
         <div className="justify-center flex flex-row item-center gap-2">
