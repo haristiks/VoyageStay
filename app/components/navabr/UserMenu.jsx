@@ -3,24 +3,35 @@ import { AiOutlineMenu } from "react-icons/ai";
 import Avatar from "../Avatar";
 import { useCallback, useState } from "react";
 import MenuItem from "./MenuItem";
+import { signOut } from "next-auth/react";
+
 import useRegisterModal from "@/app/hooks/useRegisterModal";
 import useLoginModal from "@/app/hooks/useLoginModal";
-import { signOut } from "next-auth/react";
+import useRentModal from "@/app/hooks/useRentModal";
 
 function UserMenu({ currentUser }) {
   const registerModal = useRegisterModal();
   const loginModal = useLoginModal();
+  const rentModal = useRentModal();
+
   const [isOpen, setIsOpen] = useState(false);
 
   const toggleOpen = useCallback(() => {
     setIsOpen((value) => !value);
   }, []);
 
+  const onRent = useCallback(() => {
+    if (!currentUser) {
+      return loginModal.onOpen();
+    }
+    rentModal.onOpen();
+  }, [currentUser, loginModal,rentModal]);
+
   return (
     <div className="relative">
       <div className="flex flex-row items-center gap-3 ">
         <div
-          onClick={() => {}}
+          onClick={onRent}
           className="
              hidden
              md:block
@@ -56,7 +67,11 @@ function UserMenu({ currentUser }) {
         >
           <AiOutlineMenu />
           <div className="hidden md:block">
-            {currentUser ? <Avatar src={currentUser.image || currentUser.doc.image} /> : <Avatar />}
+            {currentUser ? (
+              <Avatar src={currentUser.image} />
+            ) : (
+              <Avatar />
+            )}
           </div>
         </div>
       </div>
@@ -69,7 +84,7 @@ function UserMenu({ currentUser }) {
                 <MenuItem onClick={() => {}} label="My favorites" />
                 <MenuItem onClick={() => {}} label="My reservations" />
                 <MenuItem onClick={() => {}} label="My properties" />
-                <MenuItem onClick={() => {}} label="VoyageStay Host" />
+                <MenuItem onClick={rentModal.onOpen} label="VoyageStay Host" />
                 <hr />
                 <MenuItem onClick={() => signOut()} label="Lgout" />
               </>
