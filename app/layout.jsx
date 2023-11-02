@@ -19,15 +19,16 @@ export const metadata = {
 };
 
 export default async function RootLayout({ children }) {
-  const currentUser=await getCurrentUser();
+  const currentUser = await getCurrentUser();
   return (
     <html lang="en">
       <body className={font.className}>
-        <ToasterProvider/>
-        <RentModal/>
-        <LoginModal/>
+        <ToasterProvider />
+        <RentModal currentUser={currentUser} />
+        <LoginModal />
         <RegisterModal />
-        <Navbar currentUser={currentUser}/>
+        <Navbar currentUser={currentUser} />
+
         {children}
       </body>
     </html>

@@ -36,7 +36,7 @@ function RegisterModal() {
     console.log(data);
     try {
       const response = await axios.post(
-        "http://localhost:8000/api/users/auth/signup",
+        "/api/users/auth/signup",
         data
       );
       toast.success(response.data.message);
