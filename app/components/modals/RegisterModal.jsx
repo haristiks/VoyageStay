@@ -1,6 +1,6 @@
 "use client";
 
-import axios from "axios";
+import axios from "@/lib/axios";
 import { AiFillGithub } from "react-icons/ai";
 import { FcGoogle } from "react-icons/fc";
 import { useCallback, useState } from "react";
@@ -33,7 +33,7 @@ function RegisterModal() {
 
   const onSubmit = async (data) => {
     setIsLoading(true);
-    console.log(data);
+    // console.log(data);
     try {
       const response = await axios.post(
         "/api/users/auth/signup",

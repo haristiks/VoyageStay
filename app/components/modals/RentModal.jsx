@@ -2,7 +2,6 @@
 
 import { NextResponse } from "next/server";
 
-
 import { toast } from "react-hot-toast";
 import useRentModal from "@/app/hooks/useRentModal";
 import Modal from "./Modal";
@@ -97,7 +96,12 @@ function RentModal({ currentUser }) {
     setIsLoading(true);
 
     axios
-      .post(`/api/users/${currentUser._doc._id}/listings`, data)
+      .post(`/api/users/${currentUser._doc._id}/listings`, data, {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${currentUser.accessToken}`,
+        },
+      })
       .then(() => {
         toast.success("Listing created!");
         router.refresh();
