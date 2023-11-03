@@ -1,12 +1,14 @@
-import axios from "@/lib/axios";
+
+
+import { useDispatch, useSelector } from "react-redux";
+import { FetchListings } from "../Redux/AxiosCalls";
 
 export default async function getListings() {
-  try {
-    const listings = await axios.get("/api/properties/listings");
-    console.log(listings);
-    return listings;
-  } catch (error) {
-    throw new Error(error);
-  }
-}
+  const Listings = useSelector((state) => state.Axios);
+  const dispatch = useDispatch();
 
+    dispatch(FetchListings)
+
+
+  return Listings;
+}

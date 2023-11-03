@@ -30,7 +30,12 @@ export const authOptions = {
         try {
           const response = await axios.post(
             "/api/users/auth/login",
-            credentials
+            credentials,
+            {
+              headers: {
+                "Content-Type": "application/json",
+              },
+            }
           );
 
           const user = response.data;

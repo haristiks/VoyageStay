@@ -1,35 +1,38 @@
-import { useCallback } from "react";
+"use client";
 import Container from "./components/Container";
 import EmptyState from "./components/EmptyState";
-import axios from "@/lib/axios";
+import { useDispatch, useSelector } from "react-redux";
+import { FetchListings } from "../app/Redux/AxiosCalls";
+import { useEffect } from "react";
 
-export default async function Home() {
-  // const getListings = async () => {
-  //   try {
-  //     const listings = await axios.get(
-  //       "http://localhost:8000/api/properties/listings"
-  //     );
-  //     console.log(listings);
-  //   } catch (error) {
-  //     throw new Error(error);
-  //   }
-  // };
+import ListingCard from "./components/listings/ListingCard";
+import getCurrentUser from "./actions/getCurrentUser";
 
-  const properties=await axios.get('/api/properties/listings')
-  console.log(properties);
+export default function Home() {
+  const Listings = useSelector((state) => state.Axios);
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(FetchListings());
+  }, []);
 
-  // if (listings.data.length == 0) {
-  //   return (
-  //     <Container>
-  //       <EmptyState showReset />
-  //     </Container>
-  //   );
-  // }
+  const currentUser=getCurrentUser();
+
+  console.log(Listings.Listings.data);
+
+  if (Listings.Listings.length == 0) {
+    return (
+      <Container>
+        <EmptyState showReset />
+      </Container>
+    );
+  }
 
   return (
     <Container>
       <div className="pt-24 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6 gap-8">
-        <div>My future listings</div>
+        {Listings.Listings.data.map((listing) => (
+          <ListingCard key={listing.id} data={listing} currentUser={currentUser}/>
+        ))}
       </div>
     </Container>
   );

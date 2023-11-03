@@ -1,14 +1,12 @@
-"use client"
+"use client";
 const { configureStore } = require("@reduxjs/toolkit");
+import reduce from './slice'
 
+const stores = configureStore({
+  reducer: {
+    Axios: reduce,
+  },
+  devTools: true,
+});
 
-const stores=configureStore({
-    reducer:{
-        Axios:reduce,
-        profileStats:Modalslice
-    },
-    devTools:true,
-    
-})
-
-export const store=stores
+export const store = stores;
