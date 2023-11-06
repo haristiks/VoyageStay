@@ -23,16 +23,17 @@ export const metadata = {
 
 export default async function RootLayout({ children }) {
   const currentUser = await getCurrentUser();
+
   return (
     <StoreProvider>
       <Provider>
         <html lang="en">
           <body className={font.className}>
             <ToasterProvider />
-            <RentModal currentUser={currentUser} />
+            <RentModal  />
             <LoginModal />
             <RegisterModal />
-            <Navbar currentUser={currentUser} />
+            <Navbar  />
             <div className="pb-20 pt-28">{children}</div>
           </body>
         </html>

@@ -18,6 +18,7 @@ import ImageUpload from "../inputs/ImageUpload";
 import Input from "../inputs/Input";
 import { useRouter } from "next/navigation";
 import axios from "@/lib/axios";
+import { useSession } from "next-auth/react";
 
 const STEPS = {
   CATEGORY: 0,
@@ -28,11 +29,13 @@ const STEPS = {
   PRICE: 5,
 };
 
-function RentModal({ currentUser }) {
+function RentModal() {
   const rentModal = useRentModal();
   const [step, setStep] = useState(STEPS.CATEGORY);
   const [isLoading, setIsLoading] = useState(false);
   const router = useRouter();
+  const { data: session } = useSession();
+  const currentUser = session?.user;
 
   const {
     register,
