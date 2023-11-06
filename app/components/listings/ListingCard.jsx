@@ -7,6 +7,7 @@ import { format } from "date-fns";
 import Image from "next/image";
 import HeartButton from "../HeartButton";
 import Button from "../Button";
+import getCurrentUser from "@/app/actions/getCurrentUser";
 
 function ListingCard({
   data,
@@ -15,10 +16,13 @@ function ListingCard({
   disabled,
   actionLabel,
   actionId = "",
-  currentUser,
+  // currentUser,
 }) {
+  const currentUser=getCurrentUser();
   const router = useRouter();
   const { getByValue } = useCountries();
+
+
 
   const location = getByValue(data.locationValue);
 
@@ -82,7 +86,7 @@ function ListingCard({
           <div className="font-semibold">₹ {price}</div>
           {!reservation && <div className="font-light">night</div>}
         </div>
-        {onAction && actioLabel && (
+        {onAction && actionLabel && (
           <Button
             disabled={disabled}
             small

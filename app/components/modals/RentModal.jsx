@@ -96,7 +96,7 @@ function RentModal({ currentUser }) {
     setIsLoading(true);
 
     axios
-      .post(`/api/users/${currentUser._doc._id}/listings`, data, {
+      .post(`/api/users/${currentUser._id}/listings`, data, {
         headers: {
           "Content-Type": "application/json",
           Authorization: `Bearer ${currentUser.accessToken}`,

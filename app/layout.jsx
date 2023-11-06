@@ -10,6 +10,7 @@ import RentModal from "./components/modals/RentModal";
 import StoreProvider from "./Redux/StoreProvider";
 
 import getCurrentUser from "@/app/actions/getCurrentUser";
+import Provider from "./Provider";
 
 const font = Nunito({
   subsets: ["latin"],
@@ -24,16 +25,18 @@ export default async function RootLayout({ children }) {
   const currentUser = await getCurrentUser();
   return (
     <StoreProvider>
-      <html lang="en">
-        <body className={font.className}>
-          <ToasterProvider />
-          <RentModal currentUser={currentUser} />
-          <LoginModal />
-          <RegisterModal />
-          <Navbar currentUser={currentUser} />
-          <div className="pb-20 pt-28">{children}</div>
-        </body>
-      </html>
+      <Provider>
+        <html lang="en">
+          <body className={font.className}>
+            <ToasterProvider />
+            <RentModal currentUser={currentUser} />
+            <LoginModal />
+            <RegisterModal />
+            <Navbar currentUser={currentUser} />
+            <div className="pb-20 pt-28">{children}</div>
+          </body>
+        </html>
+      </Provider>
     </StoreProvider>
   );
 }

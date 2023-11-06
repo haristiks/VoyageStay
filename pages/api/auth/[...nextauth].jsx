@@ -37,8 +37,9 @@ export const authOptions = {
               },
             }
           );
-
+            console.log(response);
           const user = response.data;
+      
 
           if (user) {
             return user;
