@@ -6,12 +6,12 @@ import { FetchListings } from "../app/Redux/AxiosCalls";
 import { useEffect } from "react";
 
 import ListingCard from "./components/listings/ListingCard";
-import getCurrentUser from "./actions/getCurrentUser";
 import { useSession } from "next-auth/react";
-import { authOptions } from "@/pages/api/auth/[...nextauth]";
+import getListings from "./actions/getListings";
 
 export default function Home() {
   const Listings = useSelector((state) => state.Axios);
+
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(FetchListings());
@@ -19,10 +19,9 @@ export default function Home() {
 
   const { data: session } = useSession();
 
-  const currentUser = getCurrentUser();
-  console.log(session);
+  const currentUser = session?.user;
 
-  console.log(Listings.Listings.data);
+  // console.log(Listings.Listings.data);
 
   if (Listings.Listings.length == 0) {
     return (
@@ -35,7 +34,7 @@ export default function Home() {
   return (
     <Container>
       <div className="pt-24 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6 gap-8">
-        {Listings.Listings.data.map((listing) => (
+        {Listings.Listings.map((listing) => (
           <ListingCard
             key={listing.id}
             data={listing}

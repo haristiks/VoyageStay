@@ -7,7 +7,7 @@ import { format } from "date-fns";
 import Image from "next/image";
 import HeartButton from "../HeartButton";
 import Button from "../Button";
-import getCurrentUser from "@/app/actions/getCurrentUser";
+
 
 function ListingCard({
   data,
@@ -16,11 +16,12 @@ function ListingCard({
   disabled,
   actionLabel,
   actionId = "",
-  // currentUser,
+  currentUser,
 }) {
-  const currentUser=getCurrentUser();
+
   const router = useRouter();
   const { getByValue } = useCountries();
+
 
 
 
@@ -28,7 +29,7 @@ function ListingCard({
 
   const handleCancel = useCallback(
     (e) => {
-      e.stopPropagation();
+      // e.stopPropagation();
 
       if (disabled) {
         return;
@@ -60,7 +61,7 @@ function ListingCard({
   return (
     <div
       onClick={() => {
-        router.push(`/listings/${data.id}`);
+        router.push(`/listings/${data._id}`);
       }}
       className="col-span-1 cursor-pointer group"
     >
@@ -73,7 +74,7 @@ function ListingCard({
             className="object-cover h-full w-full group-hover-scale-110 transition"
           />
           <div className="absolute top-3 right-3">
-            <HeartButton listingId={data.id} currentUser={currentUser} />
+            <HeartButton listingId={data._id}/>
           </div>
         </div>
         <div className="font-semibold text-lg">

@@ -8,6 +8,6 @@ export const FetchListings = createAsyncThunk(
   "redux/fetchListings",
   async () => {
     const respo = await axios.get("/api/properties/listings");
-    return respo.data;
+    return respo.data.data;
   }
 );
