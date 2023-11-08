@@ -19,6 +19,8 @@ import Input from "../inputs/Input";
 import { useRouter } from "next/navigation";
 import axios from "@/lib/axios";
 import { useSession } from "next-auth/react";
+import { useDispatch } from "react-redux";
+import { FetchListings } from "@/app/Redux/AxiosCalls";
 
 const STEPS = {
   CATEGORY: 0,
@@ -36,6 +38,8 @@ function RentModal() {
   const router = useRouter();
   const { data: session } = useSession();
   const currentUser = session?.user;
+
+  const dispatch = useDispatch();
 
   const {
     register,
@@ -110,6 +114,7 @@ function RentModal() {
         router.refresh();
         reset();
         setStep(STEPS.CATEGORY);
+        dispatch(FetchListings());
         rentModal.onClose();
       })
       .catch(() => {

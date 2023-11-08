@@ -37,9 +37,8 @@ export const authOptions = {
               },
             }
           );
-            console.log(response);
+          console.log(response);
           const user = response.data;
-      
 
           if (user) {
             return user;
@@ -56,9 +55,7 @@ export const authOptions = {
     signIn: "/",
   },
   debug: process.env.NODE_ENV === "development",
-  //   session: {
-  //     strategy: "jwt",
-  //   },
+
   secret: process.env.NEXTAUTH_SECRET,
   callbacks: {
     async jwt({ token, user }) {

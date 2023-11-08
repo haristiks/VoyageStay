@@ -1,10 +1,11 @@
 "use client";
 import { createSlice } from "@reduxjs/toolkit";
 
-import { FetchListings } from "./AxiosCalls";
+import { FetchListings} from "./AxiosCalls";
+
 
 const slice = createSlice({
-  name: "axios",
+  name: "Listings",
   initialState: {
     FetchListingStat: "",
     Listings: [],
@@ -25,4 +26,7 @@ const slice = createSlice({
   },
 });
 
+
+
 export default slice.reducer;
+

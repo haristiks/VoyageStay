@@ -7,7 +7,6 @@ import { useEffect } from "react";
 
 import ListingCard from "./components/listings/ListingCard";
 import { useSession } from "next-auth/react";
-import getListings from "./actions/getListings";
 
 export default function Home() {
   const Listings = useSelector((state) => state.Axios);
@@ -26,7 +25,9 @@ export default function Home() {
   if (Listings.Listings.length == 0) {
     return (
       <Container>
-        <EmptyState showReset />
+        <div className="pt-24">
+          <EmptyState showReset />
+        </div>
       </Container>
     );
   }

@@ -8,7 +8,8 @@ import ListingInfo from "@/app/components/listings/ListingInfo";
 import useLoginModal from "@/app/hooks/useLoginModal";
 import { useRouter } from "next/navigation";
 import { differenceInCalendarDays, eachDayOfInterval } from "date-fns";
-import hostaxios from "@/lib/hostaxios";
+
+import axios from "@/lib/axios";
 import toast from "react-hot-toast";
 import ListingReservation from "@/app/components/listings/ListingReservation";
 
@@ -41,20 +42,29 @@ function ListingClient({ listing, currentUser, reservations = [] }) {
   const [totalPrice, setTotalPrice] = useState(listing.price);
   const [dateRange, setDateRange] = useState(initialDateRange);
 
-  const onCreateReservation = useCallback(() => {
+  const onCreateReservation = useCallback(async () => {
     if (!currentUser) {
       return loginModal.onOpen();
     }
 
     setIsloading(true);
 
-    hostaxios
-      .post("/api/reservations", {
-        totalPrice,
-        startDate: dateRange.startDate,
-        endDate: dateRange.endDate,
-        listingId: listing?._id,
-      })
+    await axios
+      .post(
+        `/api/users/${currentUser._id}/reservations`,
+        {
+          totalPrice,
+          startDate: dateRange.startDate,
+          endDate: dateRange.endDate,
+          listingId: listing?._id,
+        },
+        {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${currentUser.accessToken}`,
+          },
+        }
+      )
       .then(() => {
         toast.success("listing reserved");
         setDateRange(initialDateRange);
@@ -99,7 +109,7 @@ function ListingClient({ listing, currentUser, reservations = [] }) {
             id={listing._id}
             currentUser={currentUser}
           />
-          <div className="grid grid-cols-1 md:grid-cols-2 md:gap-10 mt-6">
+          <div className="grid grid-cols-1 md:grid-cols-7 md:gap-10 mt-6">
             <ListingInfo
               user={listing.user}
               category={category}

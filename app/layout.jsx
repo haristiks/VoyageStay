@@ -7,7 +7,11 @@ import RegisterModal from "./components/modals/RegisterModal";
 import LoginModal from "./components/modals/LoginModal";
 import RentModal from "./components/modals/RentModal";
 
+
 import StoreProvider from "./Redux/StoreProvider";
+
+
+
 
 import Provider from "./Provider";
 
@@ -21,6 +25,7 @@ export const metadata = {
 };
 
 export default async function RootLayout({ children }) {
+
   return (
     <StoreProvider>
       <Provider>
