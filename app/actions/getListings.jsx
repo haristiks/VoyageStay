@@ -7,8 +7,8 @@ export default function getListings() {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(FetchListings);
+    dispatch(FetchListings());
   }, []);
-
+  
   return Listings.Listings;
 }

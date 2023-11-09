@@ -7,7 +7,12 @@ import { format } from "date-fns";
 import Image from "next/image";
 import HeartButton from "../HeartButton";
 import Button from "../Button";
-
+import { useDispatch } from "react-redux";
+import {
+  FetchListings,
+  FetchReservations,
+  FetchUsers,
+} from "@/app/Redux/AxiosCalls";
 
 function ListingCard({
   data,
@@ -18,18 +23,15 @@ function ListingCard({
   actionId = "",
   currentUser,
 }) {
-
   const router = useRouter();
   const { getByValue } = useCountries();
-
-
-
+  const dispatch = useDispatch();
 
   const location = getByValue(data.locationValue);
 
   const handleCancel = useCallback(
     (e) => {
-      // e.stopPropagation();
+      e.stopPropagation();
 
       if (disabled) {
         return;
@@ -61,6 +63,9 @@ function ListingCard({
   return (
     <div
       onClick={() => {
+        dispatch(FetchListings());
+        dispatch(FetchReservations());
+        dispatch(FetchUsers());
         router.push(`/listings/${data._id}`);
       }}
       className="col-span-1 cursor-pointer group"
@@ -74,7 +79,7 @@ function ListingCard({
             className="object-cover h-full w-full group-hover-scale-110 transition"
           />
           <div className="absolute top-3 right-3">
-            <HeartButton listingId={data._id}/>
+            <HeartButton listingId={data._id} />
           </div>
         </div>
         <div className="font-semibold text-lg">

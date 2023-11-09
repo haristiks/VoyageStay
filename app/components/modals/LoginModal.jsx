@@ -14,6 +14,7 @@ import Button from "../Button";
 import useLoginModal from "@/app/hooks/useLoginModal";
 import { useRouter } from "next/navigation";
 
+
 function LoginModal() {
   const router = useRouter();
 
@@ -57,10 +58,10 @@ function LoginModal() {
     }
   };
 
-  const toggle=useCallback(()=>{
+  const toggle = useCallback(() => {
     loginModal.onClose();
     registerModal.onOpen();
-  },[loginModal,registerModal])
+  }, [loginModal, registerModal]);
 
   const bodyContent = (
     <div className="flex flex-col gap-4">

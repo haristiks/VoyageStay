@@ -8,8 +8,11 @@ import { signOut } from "next-auth/react";
 import useRegisterModal from "@/app/hooks/useRegisterModal";
 import useLoginModal from "@/app/hooks/useLoginModal";
 import useRentModal from "@/app/hooks/useRentModal";
+import { useRouter } from "next/navigation";
 
 function UserMenu({ currentUser }) {
+  const router = useRouter();
+
   const registerModal = useRegisterModal();
   const loginModal = useLoginModal();
   const rentModal = useRentModal();
@@ -25,7 +28,7 @@ function UserMenu({ currentUser }) {
       return loginModal.onOpen();
     }
     rentModal.onOpen();
-  }, [currentUser, loginModal,rentModal]);
+  }, [currentUser, loginModal, rentModal]);
 
   return (
     <div className="relative">
@@ -67,11 +70,7 @@ function UserMenu({ currentUser }) {
         >
           <AiOutlineMenu />
           <div className="hidden md:block">
-            {currentUser ? (
-              <Avatar src={currentUser.image} />
-            ) : (
-              <Avatar />
-            )}
+            {currentUser ? <Avatar src={currentUser.image} /> : <Avatar />}
           </div>
         </div>
       </div>
@@ -80,7 +79,10 @@ function UserMenu({ currentUser }) {
           <div className="flex flex-col cursor-pointer">
             {currentUser ? (
               <>
-                <MenuItem onClick={() => {}} label="My trips" />
+                <MenuItem
+                  onClick={() => router.push("/trips")}
+                  label="My trips"
+                />
                 <MenuItem onClick={() => {}} label="My favorites" />
                 <MenuItem onClick={() => {}} label="My reservations" />
                 <MenuItem onClick={() => {}} label="My properties" />

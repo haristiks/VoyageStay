@@ -13,6 +13,9 @@ import axios from "@/lib/axios";
 import toast from "react-hot-toast";
 import ListingReservation from "@/app/components/listings/ListingReservation";
 
+import { useDispatch } from "react-redux";
+import { FetchListings,FetchUsers,FetchReservations } from "@/app/Redux/AxiosCalls";
+
 const initialDateRange = {
   startDate: new Date(),
   endDate: new Date(),
@@ -22,6 +25,7 @@ const initialDateRange = {
 function ListingClient({ listing, currentUser, reservations = [] }) {
   const loginModal = useLoginModal();
   const router = useRouter();
+  const dispatch=useDispatch();
 
   const disabledDates = useMemo(() => {
     let dates = [];
@@ -68,8 +72,12 @@ function ListingClient({ listing, currentUser, reservations = [] }) {
       .then(() => {
         toast.success("listing reserved");
         setDateRange(initialDateRange);
+        //
+        dispatch(FetchListings());
+        dispatch(FetchReservations());
+        dispatch(FetchUsers());
         //Redirect to /trips
-        router.refresh();
+        router.push('/trips');
       })
       .catch(() => {
         toast.error("Something went wrong.");

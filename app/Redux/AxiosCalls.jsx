@@ -20,3 +20,11 @@ export const FetchReservations = createAsyncThunk(
     return respo.data.data;
   }
 );
+
+export const FetchUsers = createAsyncThunk(
+  "redux/fetchUsers",
+  async () => {
+    const respo = await axios.get("/api/data/users");
+    return respo.data.data;
+  }
+);

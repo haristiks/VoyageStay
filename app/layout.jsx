@@ -14,6 +14,8 @@ import StoreProvider from "./Redux/StoreProvider";
 
 
 import Provider from "./Provider";
+import Footer from "./components/footer/Footer";
+
 
 const font = Nunito({
   subsets: ["latin"],
@@ -36,7 +38,8 @@ export default async function RootLayout({ children }) {
             <LoginModal />
             <RegisterModal />
             <Navbar />
-            <div className="pb-20 pt-28">{children}</div>
+            <div className="pb-10 pt-28">{children}</div>
+            <Footer/>
           </body>
         </html>
       </Provider>
