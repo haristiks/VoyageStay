@@ -1,32 +1,27 @@
 "use client";
 
-import { useSession } from "next-auth/react";
-import { useParams } from "next/navigation";
-
 import ListingClient from "./ListingClient";
-import getListings from "@/app/actions/getListings";
-import { useSelector } from "react-redux";
+import { getPropertyListings } from "@/app/actions/getPropertyListings";
+import { getReservations } from "@/app/actions/getReservations";
+import { useParams } from "next/navigation";
+import { useEffect, useState } from "react";
 
-function ListingPage() {
-  const AllListings = getListings();
+export function ListingPage() {
+  const [property, setProperty] = useState("");
+  const [listingRseserved, setListingReserved] = useState([]);
   const { listingId } = useParams();
-  const property = AllListings.filter((listing) => listing._id == listingId);
 
-  const { data: session } = useSession();
-  const currentUser = session?.user;
+  useEffect(() => {
+    async function fetchData() {
+      const property = await getPropertyListings(listingId);
+      setProperty(property);
+      const listingRseserved = await getReservations(listingId);
+      setListingReserved(listingRseserved);
+    }
+    fetchData();
+  }, []);
 
-  const Reservations = useSelector((state) => state.Bookings);
-  const listingReserved = Reservations.Reservations.filter(
-    (item) => item.listingId._id == listingId
-  );
-
-  return (
-    <ListingClient
-      listing={property[0]}
-      currentUser={currentUser}
-      reservations={listingReserved}
-    />
-  );
+  return <ListingClient listing={property} reservations={listingRseserved} />;
 }
 
 export default ListingPage;

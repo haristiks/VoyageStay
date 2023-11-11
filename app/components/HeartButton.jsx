@@ -9,21 +9,16 @@ import useLoginModal from "../hooks/useLoginModal";
 import toast from "react-hot-toast";
 import { useSession } from "next-auth/react";
 
-
-function HeartButton({ listingId }) {
+function HeartButton({ listingId, currentUser }) {
   const [Favorited, setFavorited] = useState([]);
 
-
-  
   const router = useRouter();
   const loginModal = useLoginModal();
   const { data: session } = useSession();
-  const currentUser = session?.user;
+  // const currentUser = session?.user;
   
 
   const hasFavorited = Favorited.includes(listingId);
-
-  const yesFavorited= currentUser?.favoriteIds.includes(listingId)
 
   const toggleFavorite = useCallback(
     async (e) => {
@@ -86,7 +81,7 @@ function HeartButton({ listingId }) {
       />
       <AiFillHeart
         size={24}
-        className={hasFavorited || yesFavorited ? "fill-rose-500" : "fill-neutral-500/70"}
+        className={hasFavorited ? "fill-rose-500" : "fill-neutral-500/70"}
       />
     </div>
   );

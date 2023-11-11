@@ -4,6 +4,7 @@ import GithubProvider from "next-auth/providers/github";
 import GoogleProvider from "next-auth/providers/google";
 import CredentialsProvider from "next-auth/providers/credentials";
 
+
 export const authOptions = {
   // Configure one or more authentication providers
   providers: [
@@ -55,6 +56,7 @@ export const authOptions = {
     signIn: "/",
   },
   debug: process.env.NODE_ENV === "development",
+  
 
   secret: process.env.NEXTAUTH_SECRET,
   callbacks: {
@@ -65,6 +67,10 @@ export const authOptions = {
       session.user = token;
       return session;
     },
+   
   },
 };
+
+
 export default NextAuth(authOptions);
+
