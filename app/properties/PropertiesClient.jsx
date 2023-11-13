@@ -3,12 +3,13 @@
 import axios from "@/lib/axios";
 import toast from "react-hot-toast";
 import { useCallback, useState } from "react";
-import { useRouter } from "next/navigation";
+
 import Heading from "../components/Heading";
 import Container from "../components/Container";
 import ListingCard from "../components/listings/ListingCard";
+import { useRouter } from "next/navigation";
 
-function ReservationsClient({ reservations, currentUser }) {
+function PropertiesClient({ listings, currentUser }) {
   const router = useRouter();
   const [deletingId, setDeletingId] = useState("");
 
@@ -17,14 +18,14 @@ function ReservationsClient({ reservations, currentUser }) {
       setDeletingId(id);
 
       axios
-        .delete(`/api/users/${currentUser._id}/reservations/${id}`, {
+        .delete(`/api/users/${currentUser._id}/listings/${id}`, {
           headers: {
             "Content-Type": "application/json",
             Authorization: `Bearer ${currentUser.accessToken}`,
           },
         })
         .then(() => {
-          toast.success("Reservation cancelled");
+          toast.success("Property Deleted");
           router.refresh();
         })
         .catch((error) => {
@@ -39,18 +40,20 @@ function ReservationsClient({ reservations, currentUser }) {
 
   return (
     <Container>
-      <Heading title="Reservations" subtitle="Bookings on your properties" />
+      <Heading
+        title="Properties"
+        subtitle="List of Properties you have Created."
+      />
       <div className="mt-10 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6 gap-8">
-        {reservations.map((reservation) => (
+        {listings.map((listing) => (
           <ListingCard
-            key={reservation._id}
-            data={reservation.listingId}
-            reservation={reservation}
-            actionId={reservation._id}
-            onAction={onCancel}
-            disabled={deletingId == reservation._id}
-            actionLabel="Cancel guest reservation"
             currentUser={currentUser}
+            key={listing._id}
+            data={listing}
+            actionId={listing._id}
+            onAction={onCancel}
+            disabled={deletingId == listing._id}
+            actionLabel="Delete Property"
           />
         ))}
       </div>
@@ -58,4 +61,4 @@ function ReservationsClient({ reservations, currentUser }) {
   );
 }
 
-export default ReservationsClient;
+export default PropertiesClient;
