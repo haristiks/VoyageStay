@@ -23,7 +23,7 @@ export default async function getCurrentUser() {
       return null;
     }
 
-    return currentUser;
+    return { ...currentUser, accessToken: session?.user?.accessToken };
   } catch (error) {
     return error;
   }

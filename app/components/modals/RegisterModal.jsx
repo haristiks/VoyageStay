@@ -35,12 +35,10 @@ function RegisterModal() {
     setIsLoading(true);
     // console.log(data);
     try {
-      const response = await axios.post(
-        "/api/users/auth/signup",
-        data
-      );
+      const response = await axios.post("/api/users/auth/signup", data);
       toast.success(response.data.message);
       registerModal.onClose();
+      loginModal.onOpen();
     } catch (error) {
       toast.error("Something Went Wrong");
       console.log(err);
