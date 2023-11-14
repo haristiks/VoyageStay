@@ -1,7 +1,7 @@
 "use client";
 
 import ListingClient from "./ListingClient";
-import { getPropertyListings } from "@/app/actions/getPropertyListings";
+import { getListingById } from "@/app/actions/getListingById";
 import { getReservations } from "@/app/actions/getReservations";
 import { useParams } from "next/navigation";
 import { useEffect, useState } from "react";
@@ -13,7 +13,7 @@ export function ListingPage() {
 
   useEffect(() => {
     async function fetchData() {
-      const property = await getPropertyListings(listingId);
+      const property = await getListingById(listingId);
       setProperty(property);
       const listingRseserved = await getReservations(listingId);
       setListingReserved(listingRseserved);
