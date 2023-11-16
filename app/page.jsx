@@ -1,20 +1,36 @@
 import Container from "./components/Container";
 import EmptyState from "./components/EmptyState";
 
-
 import ListingCard from "./components/listings/ListingCard";
 import { getPropertyListings } from "./actions/getPropertyListings";
 import getCurrentUser from "./actions/getCurrentUser";
 
+export default async function Home({ searchParams }) {
+  const {
+    roomCount,
+    guestCount,
+    bathroomCount,
+    locationValue,
+    startDate,
+    endDate,
+    category,
+  } = searchParams;
 
+  let query = "";
 
-export default async function Home() {
+  if (category && !roomCount) {
+    query = `?category=${category}`;
+  } else if (category && roomCount) {
+    query = `?bathroomCount=${bathroomCount}&category=${category}&endDate=${endDate}&guestCount=${guestCount}&locationValue=${locationValue}&roomCount=${roomCount}&startDate=${startDate}`;
+  } else if (!category && roomCount) {
+    query = `?bathroomCount=${bathroomCount}&endDate=${endDate}&guestCount=${guestCount}&locationValue=${locationValue}&roomCount=${roomCount}&startDate=${startDate}`;
+  }
 
-  const Listings = await getPropertyListings();
+  console.log("data", query);
+
+  const Listings = await getPropertyListings(query);
 
   const currentUser = await getCurrentUser();
-
-  // console.log(Listings.Listings.data);
 
   if (Listings.length == 0) {
     return (
