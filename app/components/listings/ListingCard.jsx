@@ -7,12 +7,7 @@ import { format } from "date-fns";
 import Image from "next/image";
 import HeartButton from "../HeartButton";
 import Button from "../Button";
-import { useDispatch } from "react-redux";
-import {
-  FetchListings,
-  FetchReservations,
-  FetchUsers,
-} from "@/app/Redux/AxiosCalls";
+
 
 
 function ListingCard({
@@ -26,7 +21,7 @@ function ListingCard({
 }) {
   const router = useRouter();
   const { getByValue } = useCountries();
-  const dispatch = useDispatch();
+
 
   const location = getByValue(data.locationValue);
 
@@ -64,9 +59,6 @@ function ListingCard({
   return (
     <div
       onClick={() => {
-        dispatch(FetchListings());
-        dispatch(FetchReservations());
-        dispatch(FetchUsers());
         router.push(`/listings/${data._id}`);
       }}
       className="col-span-1 cursor-pointer group"

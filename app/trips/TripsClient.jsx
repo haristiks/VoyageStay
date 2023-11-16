@@ -8,21 +8,11 @@ import toast from "react-hot-toast";
 import Container from "../components/Container";
 import Heading from "../components/Heading";
 import ListingCard from "../components/listings/ListingCard";
-import { useDispatch } from "react-redux";
-import {
-  FetchListings,
-  FetchUsers,
-  FetchReservations,
-} from "../Redux/AxiosCalls";
-
 
 function TripsClient({ reservations, currentUser }) {
   const router = useRouter();
 
   const [deletingId, setDeletingId] = useState("");
-  const dispatch = useDispatch();
-
-
 
   const onCancel = useCallback(
     (id) => {
@@ -37,9 +27,6 @@ function TripsClient({ reservations, currentUser }) {
         })
         .then(() => {
           toast.success("Reservation cancelled");
-          dispatch(FetchListings());
-          dispatch(FetchReservations());
-          dispatch(FetchUsers());
           router.refresh();
         })
         .catch((error) => {

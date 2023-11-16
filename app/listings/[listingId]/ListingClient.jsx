@@ -13,13 +13,7 @@ import axios from "@/lib/axios";
 import toast from "react-hot-toast";
 import ListingReservation from "@/app/components/listings/ListingReservation";
 
-import { useDispatch } from "react-redux";
-import {
-  FetchListings,
-  FetchUsers,
-  FetchReservations,
-} from "@/app/Redux/AxiosCalls";
-import { useSession } from "next-auth/react";
+
 
 const initialDateRange = {
   startDate: new Date(),
@@ -27,13 +21,12 @@ const initialDateRange = {
   key: "selection",
 };
 
-function ListingClient({ listing, reservations = [] }) {
-  const { data: session } = useSession();
-  const currentUser = session?.user;
+function ListingClient({ listing, reservations = [], currentUser }) {
 
   const loginModal = useLoginModal();
   const router = useRouter();
-  const dispatch = useDispatch();
+  
+
 
   const disabledDates = useMemo(() => {
     let dates = [];
@@ -80,10 +73,6 @@ function ListingClient({ listing, reservations = [] }) {
       .then(() => {
         toast.success("listing reserved");
         setDateRange(initialDateRange);
-        //
-        dispatch(FetchListings());
-        dispatch(FetchReservations());
-        dispatch(FetchUsers());
         //Redirect to /trips
         router.push("/trips");
       })

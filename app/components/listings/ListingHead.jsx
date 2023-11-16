@@ -24,7 +24,7 @@ function ListingHead({ title, locationValue, imageSrc, id, currentUser }) {
           className="object-cover w-full"
         />
         <div className="absolute top-5 right-5">
-          <HeartButton listingId={id} />
+          <HeartButton listingId={id} currentUser={currentUser} />
         </div>
       </div>
     </>
