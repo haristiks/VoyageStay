@@ -1,14 +1,16 @@
 import EmptyState from "../components/EmptyState";
 import getCurrentUser from "../actions/getCurrentUser";
 import FavoritesClient from "./FavoritesClient";
+import { getPropertyListings } from "../actions/getPropertyListings";
+import getFavoriteListings from "../actions/getFavoriteListings";
 
 async function FavoritesPage() {
   const currentUser = await getCurrentUser();
   if (!currentUser) {
     return <EmptyState title="Unauthorized" subtitle="Please login" />;
   }
+  const myFavorites = await getFavoriteListings();
 
-  const myFavorites = currentUser.favoriteIds;
   if (myFavorites.length == 0) {
     return (
       <EmptyState

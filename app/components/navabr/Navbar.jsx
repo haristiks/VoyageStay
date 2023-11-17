@@ -5,11 +5,19 @@ import Search from "./Search";
 import UserMenu from "./UserMenu";
 import Categories from "./Categories";
 import { useSession } from "next-auth/react";
+import { usePathname } from "next/navigation";
 
 
 function Navbar() {
   const { data: session } = useSession();
   const currentUser = session?.user;
+  const pathname = usePathname();
+
+  const isAdminPage = pathname == "/admin";
+
+  if (isAdminPage) {
+    return null;
+  }
 
   return (
     <div className="fixed w-full bg-white z-10 shadow-sm">

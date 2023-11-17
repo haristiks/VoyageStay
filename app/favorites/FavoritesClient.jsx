@@ -16,7 +16,7 @@ function FavoritesClient({ listings, currentUser }) {
           <ListingCard
             currentUser={currentUser}
             key={listing._id}
-            data={listing}
+            data={listing.listingId}
           />
         ))}
       </div>

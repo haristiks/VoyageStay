@@ -1,9 +1,19 @@
-import React from "react";
+'use client'
+
+
 import Link from "next/link";
 import Container from "../Container";
 import Logo from "../navabr/Logo";
+import { usePathname } from "next/navigation";
 
 function Footer() {
+  const pathname = usePathname();
+  const isAdminPage = pathname == "/admin";
+
+  if (isAdminPage) {
+    return null;
+  }
+
   return (
     <div className="border-t-[1px]">
       <Container>
@@ -15,9 +25,7 @@ function Footer() {
                   href="http://localhost:3000/"
                   className="flex items-center"
                 >
-                  
-                  <Logo/>
-                  
+                  <Logo />
                 </Link>
               </div>
               <div className="grid grid-cols-2 gap-8 sm:gap-6 sm:grid-cols-3">
