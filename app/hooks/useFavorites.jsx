@@ -12,7 +12,7 @@ const useFavorite = ({ listingId, currentUser }) => {
 
   const hasFavorited = useMemo(() => {
     const list = currentUser?.favoriteIds || [];
-    const favlist = list.filter((item) => item._id == listingId);
+    const favlist = list.filter((item) => item.listingId == listingId);
     return favlist.length > 0;
   }, [currentUser, listingId]);
 
