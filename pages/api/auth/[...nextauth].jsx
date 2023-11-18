@@ -30,7 +30,7 @@ export const authOptions = {
         }
         try {
           const response = await axios.post(
-            "/api/users/auth/login",
+            "/api/auth/login",
             credentials,
             {
               headers: {
