@@ -49,10 +49,10 @@ function AdminPage() {
   };
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen">
+    <div className="flex flex-col items-center justify-start min-h-screen ">
       <div className="text-lg font-semibold">Admin Login</div>
       {/* body */}
-      <div className="mt-8 w-full max-w-md">
+      <div className="mt-8 w-full max-w-md lg:outline  p-8 rounded flex flex-col gap-3 justify-center items-center">
         <Heading title="Welcome back" subtitle="Login to your account!" />
         <Input
           id="email"
@@ -72,7 +72,13 @@ function AdminPage() {
           required
         />
 
-        <div className="flex flex-col gap-2 p-6">
+        <Button
+          disabled={isLoading}
+          label="Log in"
+          onClick={handleSubmit(onSubmit)}
+        />
+
+        {/* <div className="flex flex-col gap-2 p-6">
           <div className="flex flex-row items-center gap-4 w-full">
             <Button
               disabled={isLoading}
@@ -80,7 +86,7 @@ function AdminPage() {
               onClick={handleSubmit(onSubmit)}
             />
           </div>
-        </div>
+        </div> */}
       </div>
     </div>
   );

@@ -12,6 +12,8 @@
     "@reduxjs/toolkit": "^1.9.7",
     "axios": "^1.6.0",
     "date-fns": "^2.30.0",
+    "flowbite": "^2.1.1",
+    "flowbite-react": "^0.6.4",
     "leaflet": "^1.9.4",
     "next": "^14.0.1",
     "next-auth": "^4.24.4",
@@ -28,7 +30,12 @@
     "react-select": "^5.7.7",
     "react-spinners": "^0.13.8",
     "world-countries": "^5.0.0",
-    "zustand": "^4.4.4"
+    "zustand": "^4.4.4",
+    "@heroicons/react": "^2.0.17",
+    "rc-table": "^7.32.1",
+    "react-js-pagination": "^3.0.2",
+    "react-pure-modal": "^2.2.0",
+    "react-transition-group": "^4.4.5"
   },
   "devDependencies": {
     "autoprefixer": "^10",
