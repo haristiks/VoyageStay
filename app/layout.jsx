@@ -12,8 +12,8 @@ import StoreProvider from "./Redux/StoreProvider";
 import Provider from "./Provider";
 import Footer from "./components/footer/Footer";
 import SearchModal from "./components/modals/SearchModal";
-
-
+import NavbarSwitcher from "./components/NavbarSwitcher";
+import isAdmin from "./actions/isAdmin";
 
 const font = Nunito({
   subsets: ["latin"],
@@ -25,7 +25,7 @@ export const metadata = {
 };
 
 export default async function RootLayout({ children }) {
-
+  const Admin = await isAdmin();
 
   return (
     <StoreProvider>
@@ -37,7 +37,8 @@ export default async function RootLayout({ children }) {
             <SearchModal />
             <LoginModal />
             <RegisterModal />
-            <Navbar />
+            {/* <Navbar /> */}
+            <NavbarSwitcher Admin={Admin} />
             <div className="pb-10 pt-28">{children}</div>
             <Footer />
           </body>
