@@ -1,6 +1,9 @@
 import React from "react";
 
-function Status({ Allusers, Listings }) {
+function Status({ Allusers, Listings, Reservations }) {
+  const cancelations = Reservations.filter(
+    (item) => item.cancelledByHost == true
+  );
   return (
     <section className="grid md:grid-cols-2 xl:grid-cols-4 gap-6">
       <div className="flex items-center p-8 bg-white shadow rounded-lg">
@@ -43,8 +46,10 @@ function Status({ Allusers, Listings }) {
           </svg>
         </div>
         <div>
-          <span className="block text-2xl font-bold">6.8</span>
-          <span className="block text-gray-500">Average mark</span>
+          <span className="block text-2xl font-bold">
+            {Reservations.length}
+          </span>
+          <span className="block text-gray-500">Total Reservations</span>
         </div>
       </div>
       <div className="flex items-center p-8 bg-white shadow rounded-lg">
@@ -65,11 +70,11 @@ function Status({ Allusers, Listings }) {
           </svg>
         </div>
         <div>
-          <span className="inline-block text-2xl font-bold">9</span>
-          <span className="inline-block text-xl text-gray-500 font-semibold">
+          <span className="inline-block text-2xl font-bold">{cancelations.length}</span>
+          {/* <span className="inline-block text-xl text-gray-500 font-semibold">
             (14%)
-          </span>
-          <span className="block text-gray-500">Underperforming students</span>
+          </span> */}
+          <span className="block text-gray-500">Cancelled Reservations</span>
         </div>
       </div>
       <div className="flex items-center p-8 bg-white shadow rounded-lg">

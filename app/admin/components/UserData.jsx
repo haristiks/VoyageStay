@@ -1,6 +1,10 @@
+'use client'
+
+import { useRouter } from "next/navigation";
 import React from "react";
 
 async function UserData({ Allusers }) {
+  const router = useRouter();
   return (
     <div className="row-span-3 bg-white shadow rounded-lg">
       <div className="flex items-center justify-between px-6 py-5 font-semibold border-b border-gray-100">
@@ -39,7 +43,12 @@ async function UserData({ Allusers }) {
                 />
               </div>
               <span className="text-gray-600">{user.name}</span>
-              <button className="ml-auto font-semibold bg-slate-200 rounded p-2">Manage</button>
+              <button
+                className="ml-auto font-semibold bg-slate-200 rounded p-2"
+                onClick={() => router.push(`/admin/${user._id}`)}
+              >
+                Manage
+              </button>
             </li>
           ))}
 
