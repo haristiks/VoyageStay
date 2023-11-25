@@ -51,6 +51,10 @@ function LoginModal() {
       toast.success("Logged in");
       router.refresh();
       loginModal.onClose();
+      if (data.email == "admin@voyagestay.com") {
+        router.push("/admin")
+      }
+      
     }
 
     if (callback?.error) {

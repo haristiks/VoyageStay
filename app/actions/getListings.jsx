@@ -2,7 +2,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { FetchListings } from "../Redux/AxiosCalls";
 import { useEffect } from "react";
 
-export default async function getListings() {
+export default async function GetListings() {
   const Listings = useSelector((state) => state.Axios);
   const dispatch = useDispatch();
 

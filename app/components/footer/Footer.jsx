@@ -10,9 +10,9 @@ function Footer() {
   const pathname = usePathname();
   const isAdminPage = pathname == "/admin" || "/admin/dashboard";
 
-  if (isAdminPage) {
-    return null;
-  }
+  // if (isAdminPage) {
+  //   return null;
+  // }
 
   return (
     <div className="border-t-[1px]">

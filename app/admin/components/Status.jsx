@@ -4,6 +4,9 @@ function Status({ Allusers, Listings, Reservations }) {
   const cancelations = Reservations.filter(
     (item) => item.cancelledByHost == true
   );
+
+  const Approved = Listings.filter((item) => item.adminApproved == true);
+
   return (
     <section className="grid md:grid-cols-2 xl:grid-cols-4 gap-6">
       <div className="flex items-center p-8 bg-white shadow rounded-lg">
@@ -70,7 +73,9 @@ function Status({ Allusers, Listings, Reservations }) {
           </svg>
         </div>
         <div>
-          <span className="inline-block text-2xl font-bold">{cancelations.length}</span>
+          <span className="inline-block text-2xl font-bold">
+            {cancelations.length}
+          </span>
           {/* <span className="inline-block text-xl text-gray-500 font-semibold">
             (14%)
           </span> */}
@@ -95,8 +100,8 @@ function Status({ Allusers, Listings, Reservations }) {
           </svg>
         </div>
         <div>
-          <span className="block text-2xl font-bold">{Listings.length}</span>
-          <span className="block text-gray-500">Total Properties</span>
+          <span className="block text-2xl font-bold">{Approved.length}</span>
+          <span className="block text-gray-500">Approved Listings</span>
         </div>
       </div>
     </section>

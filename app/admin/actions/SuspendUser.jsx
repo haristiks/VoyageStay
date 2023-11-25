@@ -13,7 +13,7 @@ export async function suspendUser(userId) {
       {
         headers: {
           "Content-Type": "application/json",
-          Authorization: `Bearer ${Admin.accessToken}`,
+          Authorization: `Bearer ${Admin?.accessToken}`,
         },
       }
     );

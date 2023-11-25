@@ -5,6 +5,8 @@ import ListingCard from "./components/listings/ListingCard";
 import { getPropertyListings } from "./actions/getPropertyListings";
 import getCurrentUser from "./actions/getCurrentUser";
 
+import PaginationControls from "./PaginationControls";
+
 export default async function Home({ searchParams }) {
   const {
     roomCount,
@@ -15,6 +17,13 @@ export default async function Home({ searchParams }) {
     endDate,
     category,
   } = searchParams;
+
+  const page = searchParams["page"] ?? "1";
+  const per_page = searchParams["per_page"] ?? "5";
+
+  // mocked, skipped and limited in the real app
+  const start = (Number(page) - 1) * Number(per_page); // 0, 5, 10 ...
+  const end = start + Number(per_page); // 5, 10, 15 ...
 
   let query = "";
 
@@ -32,6 +41,8 @@ export default async function Home({ searchParams }) {
 
   const currentUser = await getCurrentUser();
 
+  const entries = Listings?.slice(start, end);
+
   if (Listings.length == 0) {
     return (
       <Container>
@@ -45,13 +56,19 @@ export default async function Home({ searchParams }) {
   return (
     <Container>
       <div className="pt-24 pb-8 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6 gap-8">
-        {Listings?.map((listing) => (
+        {entries?.map((listing) => (
           <ListingCard
             key={listing.id}
             data={listing}
             currentUser={currentUser}
           />
         ))}
+      </div>
+      <div className="flex justify-center">
+        <PaginationControls
+          hasNextPage={end < Listings?.length}
+          hasPrevPage={start > 0}
+        />
       </div>
     </Container>
   );

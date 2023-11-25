@@ -20,7 +20,7 @@ async function AdminDashboardPage() {
           Listings={AllProperties}
           Reservations={Reservations}
         />
-        <Datas Allusers={Allusers} />
+        <Datas Allusers={Allusers} AllProperties={AllProperties} Admin={Admin} />
       </main>
     </>
   );
