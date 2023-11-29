@@ -2,6 +2,7 @@ import { Nunito } from "next/font/google";
 import "./globals.css";
 import Navbar from "./components/navabr/Navbar";
 import ToasterProvider from "./components/providers/ToasterProvider";
+import Script from "next/script";
 
 import RegisterModal from "./components/modals/RegisterModal";
 import LoginModal from "./components/modals/LoginModal";
@@ -43,6 +44,7 @@ export default async function RootLayout({ children }) {
             <Footer />
           </body>
         </html>
+        <Script src="https://checkout.razorpay.com/v1/checkout.js" />
       </Provider>
     </StoreProvider>
   );

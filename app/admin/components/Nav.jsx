@@ -1,4 +1,4 @@
-'use client'
+"use client";
 
 import Container from "@/app/components/Container";
 import { signOut } from "next-auth/react";
@@ -12,7 +12,12 @@ function Nav({ Admin }) {
       <div className="py-4 border-b-[1px]">
         <Container>
           <div className="flex flex-row items-center justify-between gap-3 md:gap-0">
-            <div className="cursor-pointer" onClick={()=>router.push("/admin")}>Voyage Stay</div>
+            <div
+              className="cursor-pointer"
+              onClick={() => router.push("/admin")}
+            >
+              Voyage Stay
+            </div>
             <div
               className="w-full md:w-auto py-2 cursor-pointer "
               onClick={() => router.push("/admin")}
@@ -34,7 +39,9 @@ function Nav({ Admin }) {
              transition
              cursor-pointer
             "
-                    onClick={() => signOut()}
+                    onClick={() => {
+                      signOut();
+                    }}
                   >
                     Sign Out
                   </div>

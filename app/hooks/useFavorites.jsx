@@ -30,24 +30,24 @@ const useFavorite = ({ listingId, currentUser }) => {
         if (hasFavorited) {
           request = () =>
             axios.patch(
-              `/api/users/${currentUser._id}/favorites`,
+              `/api/users/${currentUser?._id}/favorites`,
               { listingId },
               {
                 headers: {
                   "Content-Type": "application/json",
-                  Authorization: `Bearer ${currentUser.accessToken}`,
+                  Authorization: `Bearer ${currentUser?.accessToken}`,
                 },
               }
             );
         } else {
           request = () =>
             axios.post(
-              `/api/users/${currentUser._id}/favorites`,
+              `/api/users/${currentUser?._id}/favorites`,
               { listingId },
               {
                 headers: {
                   "Content-Type": "application/json",
-                  Authorization: `Bearer ${currentUser.accessToken}`,
+                  Authorization: `Bearer ${currentUser?.accessToken}`,
                 },
               }
             );

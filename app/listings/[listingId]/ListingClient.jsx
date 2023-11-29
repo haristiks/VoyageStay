@@ -8,12 +8,13 @@ import ListingInfo from "@/app/components/listings/ListingInfo";
 import useLoginModal from "@/app/hooks/useLoginModal";
 import { useRouter } from "next/navigation";
 import { differenceInCalendarDays, eachDayOfInterval } from "date-fns";
+import { makePayment } from "@/app/actions/makePayment";
 
 import axios from "@/lib/axios";
 import toast from "react-hot-toast";
 import ListingReservation from "@/app/components/listings/ListingReservation";
-
-
+import { loadStripe } from "@stripe/stripe-js";
+import { NextResponse } from "next/server";
 
 const initialDateRange = {
   startDate: new Date(),
@@ -22,11 +23,8 @@ const initialDateRange = {
 };
 
 function ListingClient({ listing, reservations = [], currentUser }) {
-
   const loginModal = useLoginModal();
   const router = useRouter();
-  
-
 
   const disabledDates = useMemo(() => {
     let dates = [];
@@ -54,9 +52,17 @@ function ListingClient({ listing, reservations = [], currentUser }) {
 
     setIsloading(true);
 
-    await axios
-      .post(
-        `/api/users/${currentUser._id}/reservations`,
+    const stripe = await loadStripe(process.env.NEXT_PUBLIC_STRIPE_API_KEY);
+
+    // makePayment({
+    //   totalPrice,
+    //   startDate: dateRange.startDate,
+    //   endDate: dateRange.endDate,
+    //   listingId: listing?._id,
+    // });
+    try {
+      const resp = await axios.post(
+        `/api/users/${currentUser?._id}/reservations`,
         {
           totalPrice,
           startDate: dateRange.startDate,
@@ -66,23 +72,35 @@ function ListingClient({ listing, reservations = [], currentUser }) {
         {
           headers: {
             "Content-Type": "application/json",
-            Authorization: `Bearer ${currentUser.accessToken}`,
+            Authorization: `Bearer ${currentUser?.accessToken}`,
           },
         }
-      )
-      .then(() => {
-        toast.success("listing reserved");
-        setDateRange(initialDateRange);
-        //Redirect to /trips
-        router.push("/trips");
-      })
-      .catch(() => {
-        toast.error("Something went wrong.");
-      })
-      .finally(() => {
-        setIsloading(false);
+      );
+
+      const result = stripe.redirectToCheckout({
+        sessionId: resp.data.id,
       });
-  }, [totalPrice, dateRange, listing?._id, router, currentUser, loginModal]);
+
+      setDateRange(initialDateRange);
+
+      NextResponse("result :", result);
+
+      if (result.error) {
+        console.log(result.error);
+      }
+    } catch (error) {
+      toast.error("Something went wrong.");
+    } finally {
+      setIsloading(false);
+    }
+
+    // .then(() => {
+    //   toast.success("listing reserved");
+
+    //   //Redirect to /trips
+    //   router.push("/trips");
+    // })
+  }, [totalPrice, dateRange, listing?._id, currentUser, loginModal]);
 
   const category = useMemo(() => {
     return categories.find((item) => item.label == listing.category);
