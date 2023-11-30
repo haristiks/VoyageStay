@@ -1,19 +1,5 @@
-"use client";
-import React, { useEffect } from "react";
-import { useRouter } from "next/navigation";
-
-import Container from "../components/Container";
+import Cancel from "./Cancel";
 
 export default function page() {
-  const router = useRouter();
-
-  useEffect(() => {
-    setTimeout(() => router.push("/"), [2000]);
-  }, []);
-
-  return (
-    <Container>
-      <h3>Payment Failed!, Try again </h3>
-    </Container>
-  );
+  return <Cancel />;
 }

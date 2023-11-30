@@ -1,9 +1,11 @@
 "use client";
 
+import Image from "next/image";
 import { useRouter } from "next/navigation";
 import React from "react";
 
-async function UserData({ Allusers }) {
+
+function UserData({ Allusers }) {
   const router = useRouter();
   return (
     <div className="row-span-3 bg-white shadow rounded-lg">
@@ -15,9 +17,10 @@ async function UserData({ Allusers }) {
           {Allusers?.map((user) => (
             <li className="flex items-center" key={user._id}>
               <div className="h-10 w-10 mr-3 bg-gray-100 rounded-full overflow-hidden">
-                <img
-                  src={user.image || "/images/Placeholder.png"}
+      
+                 <Image
                   alt="user avatar"
+                  src={user.image || "/images/Placeholder.png"}
                 />
               </div>
               <span className="text-gray-600">{user.name}</span>

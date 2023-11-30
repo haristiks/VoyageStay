@@ -36,7 +36,7 @@ function TripsClient({ reservations, currentUser }) {
           setDeletingId("");
         });
     },
-    [router]
+    [router,currentUser]
   );
 
   return (

@@ -5,8 +5,9 @@ import axios from "@/lib/axios";
 import { useRouter } from "next/navigation";
 import React from "react";
 import toast from "react-hot-toast";
+import Image from "next/image";
 
-async function PropertyData({ properties, Admin }) {
+function PropertyData({ properties, Admin }) {
   const toApprove = properties.filter((item) => item.adminApproved == false);
   const router = useRouter();
 
@@ -39,9 +40,9 @@ async function PropertyData({ properties, Admin }) {
           {toApprove?.map((item) => (
             <li className="flex items-center" key={item._id}>
               <div className="h-10 w-10 mr-3 bg-gray-100 rounded-full overflow-hidden">
-                <img
-                  src={item.imageSrc || "/images/Placeholder.png"}
+                <Image
                   alt="property image"
+                  src={item.imageSrc || "/images/Placeholder.png"}
                 />
               </div>
               <span

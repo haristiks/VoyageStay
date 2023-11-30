@@ -35,7 +35,7 @@ function PropertiesClient({ listings, currentUser }) {
           setDeletingId("");
         });
     },
-    [router]
+    [router, currentUser]
   );
 
   return (

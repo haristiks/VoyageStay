@@ -11,7 +11,6 @@ async function UserDetailsPage({ params }) {
   const user = Allusers.find((user) => user._id == userId);
   const Admin = await isAdmin();
   console.log("Access:", Admin);
- 
 
   return (
     <main className="profile-page">
@@ -26,7 +25,7 @@ async function UserDetailsPage({ params }) {
               <div className="flex flex-wrap justify-center">
                 <div className="w-full lg:w-3/12 px-4 lg:order-2 flex justify-center">
                   <div className="relative">
-                    <img
+                    <Image
                       alt="..."
                       src={user.image || "/images/Placeholder.png"}
                       className="shadow-xl rounded-full h-auto align-middle border-none absolute -m-16 -ml-20 lg:-ml-16"
@@ -37,15 +36,9 @@ async function UserDetailsPage({ params }) {
                 <div className="w-full lg:w-4/12 px-4 lg:order-3 lg:text-right lg:self-center">
                   <div className="py-6 px-3 mt-32 sm:mt-0">
                     {user.adminSuspended ? (
-                      <ActionButton
-                        actionLabel="unsuspend"
-                        actionId={userId}
-                      />
+                      <ActionButton actionLabel="unsuspend" actionId={userId} />
                     ) : (
-                      <ActionButton
-                        actionLabel="suspend"
-                        actionId={userId}
-                      />
+                      <ActionButton actionLabel="suspend" actionId={userId} />
                     )}
                   </div>
                 </div>
