@@ -5,7 +5,6 @@ import axios from "@/lib/axios";
 import { useRouter } from "next/navigation";
 import React from "react";
 import toast from "react-hot-toast";
-import Image from "next/image";
 
 function PropertyData({ properties, Admin }) {
   const toApprove = properties.filter((item) => item.adminApproved == false);
@@ -40,10 +39,11 @@ function PropertyData({ properties, Admin }) {
           {toApprove?.map((item) => (
             <li className="flex items-center" key={item._id}>
               <div className="h-10 w-10 mr-3 bg-gray-100 rounded-full overflow-hidden">
-                <Image
-                  alt="property image"
+                <img
                   src={item.imageSrc || "/images/Placeholder.png"}
+                  alt="property image"
                 />
+                
               </div>
               <span
                 className="text-gray-600 cursor-pointer"

@@ -5,12 +5,14 @@ import isAdmin from "@/app/actions/isAdmin";
 import ActionButton from "../components/ActionButton";
 
 
+
 async function UserDetailsPage({ params }) {
   const { userId } = params;
   const Allusers = await getAllUsers();
   const user = Allusers.find((user) => user._id == userId);
   const Admin = await isAdmin();
   console.log("Access:", Admin);
+ 
 
   return (
     <main className="profile-page">
@@ -25,7 +27,7 @@ async function UserDetailsPage({ params }) {
               <div className="flex flex-wrap justify-center">
                 <div className="w-full lg:w-3/12 px-4 lg:order-2 flex justify-center">
                   <div className="relative">
-                    <Image
+                    <img
                       alt="..."
                       src={user.image || "/images/Placeholder.png"}
                       className="shadow-xl rounded-full h-auto align-middle border-none absolute -m-16 -ml-20 lg:-ml-16"
@@ -36,9 +38,15 @@ async function UserDetailsPage({ params }) {
                 <div className="w-full lg:w-4/12 px-4 lg:order-3 lg:text-right lg:self-center">
                   <div className="py-6 px-3 mt-32 sm:mt-0">
                     {user.adminSuspended ? (
-                      <ActionButton actionLabel="unsuspend" actionId={userId} />
+                      <ActionButton
+                        actionLabel="unsuspend"
+                        actionId={userId}
+                      />
                     ) : (
-                      <ActionButton actionLabel="suspend" actionId={userId} />
+                      <ActionButton
+                        actionLabel="suspend"
+                        actionId={userId}
+                      />
                     )}
                   </div>
                 </div>
@@ -68,7 +76,7 @@ async function UserDetailsPage({ params }) {
                 </div>
               </div>
               <div className="text-center mt-12">
-                <h3 className="text-4xl font-semibold leading-normal mb-2 text-gray-800 mb-2">
+                <h3 className="text-4xl font-semibold leading-normal mb-2 text-gray-800 ">
                   {user.name}
                 </h3>
                 <hr className="mb-4" />

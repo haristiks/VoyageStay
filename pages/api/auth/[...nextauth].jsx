@@ -81,19 +81,19 @@ export const authOptions = {
       session.user = token;
       return session;
     },
-    async signIn({ user, account }) {
-      if (account.provider === "google") {
-        const { name, email, picture } = user;
-            const response = await axios.post("/api/users/auth/signup", {
-              name: name,
-              email: email,
-              password: email,
-              image: picture,
-            });
-      }
+    // async signIn({ user, account }) {
+    //   if (account.provider === "google") {
+    //     const { name, email, picture } = user;
+    //         const response = await axios.post("/api/users/auth/signup", {
+    //           name: name,
+    //           email: email,
+    //           password: email,
+    //           image: picture,
+    //         });
+    //   }
 
-      return user;
-    },
+    //   return user;
+    // },
   },
 };
 
