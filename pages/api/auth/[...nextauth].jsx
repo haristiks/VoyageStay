@@ -15,25 +15,6 @@ export const authOptions = {
     GoogleProvider({
       clientId: process.env.GOOGLE_CLIENT_ID,
       clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-      // async authorize(profile) {
-      //   console.log(profile);
-      //   try {
-      //     const userExist = await axios.get(`/api/users/${profile.email}`);
-      //     if (userExist.status == 404) {
-      //       const response = await axios.post("/api/users/auth/signup", {
-      //         name: profile.name,
-      //         email: profile.email,
-      //         password: profile.email,
-      //         image: profile.picture,
-      //       });
-      //     }
-
-      //     // Return the user object
-      //     return profile;
-      //   } catch (error) {
-      //     throw new Error(error.message);
-      //   }
-      // },
     }),
     ////.........................................
     CredentialsProvider({
@@ -81,19 +62,6 @@ export const authOptions = {
       session.user = token;
       return session;
     },
-    // async signIn({ user, account }) {
-    //   if (account.provider === "google") {
-    //     const { name, email, picture } = user;
-    //         const response = await axios.post("/api/users/auth/signup", {
-    //           name: name,
-    //           email: email,
-    //           password: email,
-    //           image: picture,
-    //         });
-    //   }
-
-    //   return user;
-    // },
   },
 };
 
