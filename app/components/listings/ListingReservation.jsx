@@ -27,6 +27,25 @@ function ListingReservation({
       />
       <hr />
 
+      <div className="p-4 relative">
+        <input
+          type="text"
+          className="
+        peer
+        w-full
+        p-4
+        pt-4
+        font-bold
+        bg-white
+        border-2
+        rounded-md
+        outline:non hover:outline"
+          placeholder="Have a Promo Code ?"
+        />
+
+        <button className="absolute right-6 bottom-7 bg-rose-500 text-white px-3 py-2 rounded"> APPLY </button>
+      </div>
+
       <div className="p-4">
         <Button disabled={disabled} label="Reserve" onClick={onSubmit} />
       </div>

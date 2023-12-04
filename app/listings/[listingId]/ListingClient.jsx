@@ -15,6 +15,7 @@ import toast from "react-hot-toast";
 import ListingReservation from "@/app/components/listings/ListingReservation";
 import { loadStripe } from "@stripe/stripe-js";
 import { NextResponse } from "next/server";
+import Image from "next/image";
 
 const initialDateRange = {
   startDate: new Date(),
@@ -143,6 +144,19 @@ function ListingClient({ listing, reservations = [], currentUser }) {
               locationValue={listing.locationValue}
             />
             <div className="order-first mb-10 md:order-last md:col-span-3">
+              <div className="w-full h-[30vh] overflow-hidden rounded-xl relative mb-2">
+                <Image
+                  alt="Image"
+                  src="/images/myOffer.jpeg"
+                  fill
+                  className="object-cover w-full"
+                />
+                <div className="absolute bottom-2 right-2">
+                  <h1 className="bg-inherit p-2 rounded font-bold drop-shadow-md border-dashed border-2 border-orange-600">
+                    use promo "<span className="text-white"> FLAT50 </span>"
+                  </h1>
+                </div>
+              </div>
               <ListingReservation
                 price={listing.price}
                 totalPrice={totalPrice}
