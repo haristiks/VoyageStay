@@ -63,7 +63,7 @@ function ListingClient({ listing, reservations = [], currentUser }) {
     // });
     try {
       const resp = await axios.post(
-        `/api/users/${currentUser?._id}/reservations`,
+        `/api/users/reservations`,
         {
           totalPrice,
           startDate: dateRange.startDate,

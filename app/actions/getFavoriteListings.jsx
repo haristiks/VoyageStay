@@ -10,7 +10,7 @@ export default async function getFavoriteListings() {
     }
 
     const favorites = await axios.get(
-      `/api/users/${currentUser._id}/favorites`,
+      `/api/users/favorites`,
       {
         headers: {
           "Content-Type": "application/json",

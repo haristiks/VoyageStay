@@ -41,6 +41,7 @@ export default async function Home({ searchParams }) {
 
   const currentUser = await getCurrentUser();
 
+
   const entries = Listings?.slice(start, end);
 
   if (Listings.length == 0) {

@@ -18,7 +18,7 @@ function PropertiesClient({ listings, currentUser }) {
       setDeletingId(id);
 
       axios
-        .delete(`/api/users/${currentUser._id}/listings/${id}`, {
+        .delete(`/api/users/listings/${id}`, {
           headers: {
             "Content-Type": "application/json",
             Authorization: `Bearer ${currentUser.accessToken}`,

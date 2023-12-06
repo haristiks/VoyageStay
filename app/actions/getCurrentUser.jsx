@@ -20,7 +20,7 @@ export default async function getCurrentUser() {
     );
 
     if (!currentUser) {
-      return null;
+      return "no current user";
     }
 
     return { ...currentUser, accessToken: session?.user?.accessToken };

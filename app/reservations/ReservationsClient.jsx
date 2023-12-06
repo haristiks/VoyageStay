@@ -17,7 +17,7 @@ function ReservationsClient({ reservations, currentUser }) {
       setDeletingId(id);
 
       axios
-        .delete(`/api/users/${currentUser._id}/reservations/${id}`, {
+        .delete(`/api/users/reservations/${id}`, {
           headers: {
             "Content-Type": "application/json",
             Authorization: `Bearer ${currentUser.accessToken}`,

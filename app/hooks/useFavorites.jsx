@@ -20,6 +20,8 @@ const useFavorite = ({ listingId, currentUser }) => {
     async (e) => {
       e.stopPropagation();
 
+      console.log(currentUser);
+
       if (!currentUser) {
         return loginModal.onOpen();
       }
@@ -29,8 +31,8 @@ const useFavorite = ({ listingId, currentUser }) => {
 
         if (hasFavorited) {
           request = () =>
-            axios.patch(
-              `/api/users/${currentUser?._id}/favorites`,
+            axios.put(
+              `/api/users/favorites`,
               { listingId },
               {
                 headers: {
@@ -42,7 +44,7 @@ const useFavorite = ({ listingId, currentUser }) => {
         } else {
           request = () =>
             axios.post(
-              `/api/users/${currentUser?._id}/favorites`,
+              `/api/users/favorites`,
               { listingId },
               {
                 headers: {
