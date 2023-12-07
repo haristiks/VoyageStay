@@ -12,10 +12,11 @@ export default async function isAdmin() {
     if (session?.user?.role == "user") {
       return null;
     }
-    return session?.user;
+    const admin = session?.user;
+    const id = admin._id;
+    const { _id, ...remains } = admin;
+    return { id, ...remains };
   } catch (error) {
     return error;
   }
 }
-
-

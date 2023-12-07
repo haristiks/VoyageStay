@@ -9,17 +9,20 @@ export default async function getFavoriteListings() {
       return [];
     }
 
-    const favorites = await axios.get(
-      `/api/users/favorites`,
-      {
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${currentUser.accessToken}`,
-        },
-      }
-    );
+    const favorites = await axios.get(`/api/users/favorites`, {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${currentUser.accessToken}`,
+      },
+    });
 
-    return favorites.data.data;
+    const favoriteList = favorites?.data?.data.map((item) => {
+      const id = item._id;
+      const { _id, ...remains } = item;
+      return { id, ...remains };
+    });
+
+    return favoriteList;
   } catch (error) {
     throw new Error(error);
   }

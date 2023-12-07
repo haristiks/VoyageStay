@@ -5,11 +5,21 @@ export async function getPropertyListings(query) {
   try {
     if (query == "") {
       const respo = await axios.get(`/api/data/listings`);
-      return respo.data.data;
+      const Listings = respo?.data?.data.map((item) => {
+        const id = item._id;
+        const { _id, ...remains } = item;
+        return { id, ...remains };
+      });
+      return Listings;
     }
 
     const respo = await axios.get(`/api/data/listings${query}`);
-    return respo.data.data;
+    const Listings = respo?.data?.data.map((item) => {
+      const id = item._id;
+      const { _id, ...remains } = item;
+      return { id, ...remains };
+    });
+    return Listings;
   } catch (error) {
     NextResponse.error(error);
   }

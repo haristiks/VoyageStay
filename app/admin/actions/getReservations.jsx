@@ -10,7 +10,13 @@ async function getReservations() {
           Authorization: `Bearer ${admin.accessToken}`,
         },
       });
-    return respo.data.data;
+      const reservations = respo?.data?.data.map((item) => {
+        const id = item._id;
+        const { _id, ...remains } = item;
+        return { id, ...remains };
+      });
+
+      return reservations;
   } catch (error) {
     throw new Error(error);
   }

@@ -68,7 +68,7 @@ function ListingClient({ listing, reservations = [], currentUser }) {
           totalPrice,
           startDate: dateRange.startDate,
           endDate: dateRange.endDate,
-          listingId: listing?._id,
+          listingId: listing?.id,
         },
         {
           headers: {
@@ -101,7 +101,7 @@ function ListingClient({ listing, reservations = [], currentUser }) {
     //   //Redirect to /trips
     //   router.push("/trips");
     // })
-  }, [totalPrice, dateRange, listing?._id, currentUser, loginModal]);
+  }, [totalPrice, dateRange, listing?.id, currentUser, loginModal]);
 
   const category = useMemo(() => {
     return categories.find((item) => item.label == listing.category);
@@ -130,7 +130,7 @@ function ListingClient({ listing, reservations = [], currentUser }) {
             title={listing.title}
             imageSrc={listing.imageSrc}
             locationValue={listing.locationValue}
-            id={listing._id}
+            id={listing.id}
             currentUser={currentUser}
           />
           <div className="grid grid-cols-1 md:grid-cols-7 md:gap-10 mt-6">

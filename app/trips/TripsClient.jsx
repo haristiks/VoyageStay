@@ -19,7 +19,7 @@ function TripsClient({ reservations, currentUser }) {
       setDeletingId(id);
 
       axios
-        .delete(`/api/users/${currentUser._id}/reservations/${id}`, {
+        .delete(`/api/users/${currentUser.id}/reservations/${id}`, {
           headers: {
             "Content-Type": "application/json",
             Authorization: `Bearer ${currentUser.accessToken}`,
@@ -48,12 +48,12 @@ function TripsClient({ reservations, currentUser }) {
       <div className="mt-10 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6 gap-8">
         {reservations.map((reservation) => (
           <ListingCard
-            key={reservation._id}
+            key={reservation.id}
             data={reservation.listingId}
             reservation={reservation}
-            actionId={reservation._id}
+            actionId={reservation.id}
             onAction={onCancel}
-            disabled={deletingId === reservation._id}
+            disabled={deletingId === reservation.id}
             actionLabel="Cancel reservation"
             currentUser={currentUser}
           />

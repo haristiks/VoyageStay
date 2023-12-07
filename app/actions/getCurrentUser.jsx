@@ -23,7 +23,10 @@ export default async function getCurrentUser() {
       return "no current user";
     }
 
-    return { ...currentUser, accessToken: session?.user?.accessToken };
+    const id = currentUser?._id;
+    const { _id, ...remains } = currentUser;
+
+    return { id,...remains, accessToken: session?.user?.accessToken };
   } catch (error) {
     return error;
   }

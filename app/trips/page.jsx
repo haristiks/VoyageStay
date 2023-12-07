@@ -15,7 +15,7 @@ const TripsPage = async () => {
   }
 
   const myReservations = Reservations.filter(
-    (item) => item.userId == currentUser._id
+    (item) => item.userId == currentUser.id
   );
 
   if (Reservations.length == 0) {

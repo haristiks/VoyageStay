@@ -24,6 +24,7 @@ function ListingCard({
 
   const location = getByValue(data.locationValue);
 
+
   const handleCancel = useCallback(
     (e) => {
       e.stopPropagation();
@@ -58,7 +59,7 @@ function ListingCard({
   return (
     <div
       onClick={() => {
-        router.push(`/listings/${data._id}`);
+        router.push(`/listings/${data.id}`);
       }}
       className="col-span-1 cursor-pointer group"
     >
@@ -71,7 +72,7 @@ function ListingCard({
             className="object-cover h-full w-full group-hover-scale-110 transition"
           />
           <div className="absolute top-3 right-3">
-            <HeartButton listingId={data._id} currentUser={currentUser} />
+            <HeartButton listingId={data.id} currentUser={currentUser} />
           </div>
         </div>
         <div className="font-semibold text-lg">

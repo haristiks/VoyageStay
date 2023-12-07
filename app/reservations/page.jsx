@@ -12,7 +12,7 @@ async function RservationPage() {
 
   const allReserVations = await getReservations();
   const reservationOnMylistings = allReserVations.filter(
-    (item) => item.listingId.userId == currentUser._id
+    (item) => item.listingId.userId == currentUser.id
   );
 
   if (!reservationOnMylistings) {

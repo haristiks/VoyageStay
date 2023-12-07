@@ -15,7 +15,7 @@ function FavoritesClient({ listings, currentUser }) {
         {listings?.map((listing) => (
           <ListingCard
             currentUser={currentUser}
-            key={listing._id}
+            key={listing.id}
             data={listing.listingId}
           />
         ))}
