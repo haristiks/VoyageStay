@@ -37,7 +37,7 @@ function PropertyData({ properties, Admin }) {
       <div className="overflow-y-auto" style={{ maxHeight: "24rem" }}>
         <ul className="p-6 space-y-6">
           {toApprove?.map((item) => (
-            <li className="flex items-center" key={item._id}>
+            <li className="flex items-center" key={item.id}>
               <div className="h-10 w-10 mr-3 bg-gray-100 rounded-full overflow-hidden">
                 <img
                   src={item.imageSrc || "/images/Placeholder.png"}
@@ -47,7 +47,7 @@ function PropertyData({ properties, Admin }) {
               </div>
               <span
                 className="text-gray-600 cursor-pointer"
-                onClick={() => router.push(`/listings/${item._id}`)}
+                onClick={() => router.push(`/listings/${item.id}`)}
               >
                 {item.title}
               </span>
@@ -59,7 +59,7 @@ function PropertyData({ properties, Admin }) {
               </button> */}
               <button
                 className="ml-auto font-semibold bg-slate-200 rounded p-2"
-                onClick={() => handleApprove(item._id)}
+                onClick={() => handleApprove(item.id)}
               >
                 Approve
               </button>

@@ -10,7 +10,12 @@ async function getAllListings() {
         Authorization: `Bearer ${Admin?.accessToken}`,
       },
     });
-    return respo.data.data;
+    const Listings = respo?.data?.data.map((item) => {
+      const id = item._id;
+      const { _id, ...remains } = item;
+      return { id, ...remains };
+    });
+    return Listings;
   } catch (error) {
     throw new Error(error);
   }

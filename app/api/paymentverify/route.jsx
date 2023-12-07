@@ -36,7 +36,7 @@ export async function POST(req, res) {
 
     await axios
       .post(
-        `/api/users/${currentUser?._id}/reservations`,
+        `/api/users/${currentUser?.id}/reservations`,
         {
           totalPrice,
           startDate,
