@@ -13,7 +13,7 @@ function UserData({ Allusers }) {
       <div className="overflow-y-auto" style={{ maxHeight: "24rem" }}>
         <ul className="p-6 space-y-6">
           {Allusers?.map((user) => (
-            <li className="flex items-center" key={user._id}>
+            <li className="flex items-center" key={user.id}>
               <div className="h-10 w-10 mr-3 bg-gray-100 rounded-full overflow-hidden">
                 <img
                   src={user.image || "/images/Placeholder.png"}
@@ -23,7 +23,7 @@ function UserData({ Allusers }) {
               <span className="text-gray-600">{user.name}</span>
               <button
                 className="ml-auto font-semibold bg-slate-200 rounded p-2"
-                onClick={() => router.push(`/admin/${user._id}`)}
+                onClick={() => router.push(`/admin/${user.id}`)}
               >
                 Manage
               </button>

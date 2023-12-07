@@ -9,7 +9,7 @@ import ActionButton from "../components/ActionButton";
 async function UserDetailsPage({ params }) {
   const { userId } = params;
   const Allusers = await getAllUsers();
-  const user = Allusers.find((user) => user._id == userId);
+  const user = Allusers.find((user) => user.id == userId);
   const Admin = await isAdmin();
   console.log("Access:", Admin);
  
