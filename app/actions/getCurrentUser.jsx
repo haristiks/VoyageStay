@@ -24,9 +24,10 @@ export default async function getCurrentUser() {
     }
 
     const id = currentUser?._id;
-    const { _id, ...remains } = currentUser;
+    const { _id, listings, favoriteIds, reservations, ...remains } =
+      currentUser;
 
-    return { id,...remains, accessToken: session?.user?.accessToken };
+    return { id, ...remains, accessToken: session?.user?.accessToken };
   } catch (error) {
     return error;
   }

@@ -1,3 +1,5 @@
+
+
 import getCurrentUser from "../actions/getCurrentUser";
 import { getReservations } from "../actions/getReservations";
 import EmptyState from "../components/EmptyState";
@@ -8,7 +10,7 @@ const TripsPage = async () => {
   const currentUser = await getCurrentUser();
 
   const Reservations = await getReservations();
-  console.log(Reservations);
+
 
   if (!currentUser) {
     return <EmptyState title="Unothorized" subtitle="Please Login" />;
@@ -29,6 +31,7 @@ const TripsPage = async () => {
 
   return (
     <TripsClient reservations={myReservations} currentUser={currentUser} />
+    
   );
 };
 

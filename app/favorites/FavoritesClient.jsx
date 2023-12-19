@@ -5,6 +5,8 @@ import Container from "../components/Container";
 import ListingCard from "../components/listings/ListingCard";
 
 function FavoritesClient({ listings, currentUser }) {
+ 
+
   return (
     <Container>
       <Heading

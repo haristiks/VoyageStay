@@ -6,6 +6,7 @@ import Nav from "../admin/components/Nav";
 
 function NavbarSwitcher({ Admin }) {
   const pathname = usePathname();
+ 
 
   const isAdminPage = pathname.startsWith("/admin");
 

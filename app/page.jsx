@@ -6,6 +6,7 @@ import { getPropertyListings } from "./actions/getPropertyListings";
 import getCurrentUser from "./actions/getCurrentUser";
 
 import PaginationControls from "./PaginationControls";
+import { list } from "postcss";
 
 export default async function Home({ searchParams }) {
   const {
@@ -41,7 +42,6 @@ export default async function Home({ searchParams }) {
 
   const currentUser = await getCurrentUser();
 
-
   const entries = Listings?.slice(start, end);
 
   if (Listings.length == 0) {
@@ -59,9 +59,9 @@ export default async function Home({ searchParams }) {
       <div className="pt-24 pb-8 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6 gap-8">
         {entries?.map((listing) => (
           <ListingCard
-            key={listing.id}
-            data={listing}
-            currentUser={currentUser}
+            key={JSON.parse(JSON.stringify(listing.id))}
+            data={JSON.parse(JSON.stringify(listing))}
+            currentUser={JSON.parse(JSON.stringify(currentUser))}
           />
         ))}
       </div>

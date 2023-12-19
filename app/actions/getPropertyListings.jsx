@@ -7,7 +7,7 @@ export async function getPropertyListings(query) {
       const respo = await axios.get(`/api/data/listings`);
       const Listings = respo?.data?.data.map((item) => {
         const id = item._id;
-        const { _id, ...remains } = item;
+        const { _id, __v, ...remains } = item;
         return { id, ...remains };
       });
       return Listings;

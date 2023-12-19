@@ -4,6 +4,8 @@ import { useRouter } from "next/navigation";
 import toast from "react-hot-toast";
 
 const Success = ({ data }) => {
+ 
+
   const router = useRouter();
 
   if (data) {

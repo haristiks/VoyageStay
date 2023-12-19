@@ -8,8 +8,6 @@ import Image from "next/image";
 import HeartButton from "../HeartButton";
 import Button from "../Button";
 
-
-
 function ListingCard({
   data,
   reservation,
@@ -19,11 +17,12 @@ function ListingCard({
   actionId = "",
   currentUser,
 }) {
+
+
   const router = useRouter();
   const { getByValue } = useCountries();
 
   const location = getByValue(data.locationValue);
-
 
   const handleCancel = useCallback(
     (e) => {

@@ -10,6 +10,8 @@ import ListingCard from "../components/listings/ListingCard";
 import { useRouter } from "next/navigation";
 
 function PropertiesClient({ listings, currentUser }) {
+
+
   const router = useRouter();
   const [deletingId, setDeletingId] = useState("");
 

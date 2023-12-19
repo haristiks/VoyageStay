@@ -9,7 +9,7 @@ export default function Cancel() {
 
   useEffect(() => {
     setTimeout(() => router.push("/"), [2000]);
-  }, []);
+  }, [router]);
 
   return (
     <Container>

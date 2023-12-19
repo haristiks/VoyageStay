@@ -9,6 +9,9 @@ import Container from "../components/Container";
 import ListingCard from "../components/listings/ListingCard";
 
 function ReservationsClient({ reservations, currentUser }) {
+  
+
+  
   const router = useRouter();
   const [deletingId, setDeletingId] = useState("");
 

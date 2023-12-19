@@ -24,6 +24,8 @@ const initialDateRange = {
 };
 
 function ListingClient({ listing, reservations = [], currentUser }) {
+
+
   const loginModal = useLoginModal();
   const router = useRouter();
 
@@ -153,7 +155,7 @@ function ListingClient({ listing, reservations = [], currentUser }) {
                 />
                 <div className="absolute bottom-2 right-2">
                   <h1 className="bg-inherit p-2 rounded font-bold drop-shadow-md border-dashed border-2 border-orange-600">
-                    use promo "<span className="text-white"> FLAT50 </span>"
+                    use promo : <span className="text-white"> FLAT50 </span>
                   </h1>
                 </div>
               </div>
